@@ -4,6 +4,7 @@ const coursesRoute=require('./../routes/course');
 const authRoute=require('./../routes/auth');
 const userRoute=require('./../routes/user');
 const reviewRoute=require('./../routes/review');
+const uploadRoute=require('./../routes/upload');
 const error=require('../middelware/errorHandling');
 
 module.exports=(app)=>{
@@ -13,6 +14,7 @@ module.exports=(app)=>{
     app.use('/api/v1/auth',authRoute);
     app.use('/api/v1/users', userRoute);
     app.use('/api/v1/reviews', reviewRoute);
+    app.use('/api/v1/upload', uploadRoute);
     
     app.use(error);
 }

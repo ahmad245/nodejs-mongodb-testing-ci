@@ -5,7 +5,7 @@ const {
   login,
   logout,
   getMe,
-  
+
   updateDetails,
   updatePassword,
    forgotPassword,

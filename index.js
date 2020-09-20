@@ -56,7 +56,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname,'public')));
 app.use(morgan('dev'));
 
-require('./startup/logging')();
+//require('./startup/logging')();
 require('./startup/routes')(app);
 
 const PORT=process.env.PORT || 500;

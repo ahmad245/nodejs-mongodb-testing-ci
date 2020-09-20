@@ -20,6 +20,7 @@
     "supertest": "^4.0.2"
   },
   "dependencies": {
+    "aws-sdk": "^2.756.0",
     "bcryptjs": "^2.4.3",
     "color": "^3.1.2",
     "cookie-parser": "^1.4.5",
@@ -38,6 +39,7 @@
     "nodemailer": "^6.4.11",
     "redis": "^3.0.2",
     "slugify": "^1.4.5",
+    "uuid": "^8.3.0",
     "winston": "^3.3.3",
     "xss-clean": "^0.1.1"
   }
