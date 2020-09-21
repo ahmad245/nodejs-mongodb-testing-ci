@@ -45,6 +45,10 @@ const couresSchema=new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'User',
         required: true
+      },
+      students:[{type:mongoose.Schema.ObjectId, ref:'User',required:false}],
+      exam:{
+        type:mongoose.Schema.ObjectId,ref:'Exam',required:false
       }
 
 })

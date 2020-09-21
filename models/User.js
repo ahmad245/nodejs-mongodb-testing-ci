@@ -33,7 +33,8 @@ const UserSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  courses:[{type:mongoose.Schema.ObjectId, ref:'Course',required:false}],
 });
 
 // Encrypt password using bcrypt
