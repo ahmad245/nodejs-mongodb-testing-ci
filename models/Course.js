@@ -47,9 +47,7 @@ const couresSchema=new mongoose.Schema({
         required: true
       },
       students:[{type:mongoose.Schema.ObjectId, ref:'User',required:false}],
-      exam:{
-        type:mongoose.Schema.ObjectId,ref:'Exam',required:false
-      }
+
 
 })
 
@@ -89,6 +87,7 @@ couresSchema.post('save', async function() {
 couresSchema.post('remove', async function () {
   await this.constructor.getAverageCost(this.bootcamp);
 });
+
 
 
 

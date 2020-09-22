@@ -43,11 +43,18 @@ const examSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  difficulty:{
-    type:Number,
-    required:true,
-    default:1
-},
+  difficulty: {
+    type: Number,
+    required: true,
+    default: 1,
+  },
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  
+  
 });
 
 const Exam = mongoose.model("Exam", examSchema);
