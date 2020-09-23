@@ -1,0 +1,17 @@
+{
+    "success": true,
+    "data": {
+        "status": false,
+        "difficulty": 1,
+        "_id": "5f6b88d6c16dc033a85acd94",
+        "name": "exam1",
+        "description": "this is first exam",
+        "nq": 10,
+        "startDate": "2020-09-23T17:25:59.614Z",
+        "time": "100",
+        "course": "5f6b85278e74433344e5d19c",
+        "user": "5f6748c698bc302492bdcc7e",
+        "createdAt": "2020-09-23T17:41:42.689Z",
+        "__v": 0
+    }
+}

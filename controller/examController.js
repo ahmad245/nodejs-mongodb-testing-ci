@@ -21,7 +21,9 @@ module.exports.getById = async (req, res, next) => {
 module.exports.post = async (req, res, next) => {
   req.body.course = req.params.courseId;
   req.body.user = req.user.id;
-  const course = Course.findById(req.params.courseId);
+  const course =await Course.findById(req.params.courseId);
+  console.log(course);
+  
   if (!course) {
     return res
       .status(404)

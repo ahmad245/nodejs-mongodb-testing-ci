@@ -1,0 +1,16 @@
+{
+    "success": true,
+    "data": {
+        "options": [
+            "are you ok",
+            "you are ok"
+        ],
+        "status": false,
+        "_id": "5f6b8b1f7320de33f31e0e3f",
+        "text": "this is first question",
+        "correctAnswer": 1,
+        "score": 2,
+        "exam": "5f6b88d6c16dc033a85acd94",
+        "__v": 0
+    }
+}

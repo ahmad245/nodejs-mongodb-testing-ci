@@ -21,7 +21,7 @@ module.exports.getById = async (req, res, next) => {
 module.exports.post = async (req, res, next) => {
   req.body.exam = req.params.examId;
   req.body.user = req.user.id;
-  const exam = Exam.findById(req.params.examId);
+  const exam =await Exam.findById(req.params.examId);
   if (!exam) {
     return res
       .status(404)
