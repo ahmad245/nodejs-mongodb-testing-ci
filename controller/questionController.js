@@ -15,6 +15,9 @@ module.exports.getById = async (req, res, next) => {
   res.status(200).json({ data: question, success: true });
 }
 
+// @desc      Add question
+// @route     POST /api/v1/exams/:examId/questions
+// @access    Private
 module.exports.post = async (req, res, next) => {
   req.body.exam = req.params.examId;
   req.body.user = req.user.id;

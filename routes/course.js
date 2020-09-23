@@ -13,8 +13,11 @@ const Course=require('../models/Course');
 const {clearCache}=require('../middelware/clearCache');
 const {protect,authorize}=require('../middelware/auth');
 
+const examRouter=require('./exam');
+
 
 const route = express.Router({mergeParams:true});
+route.use('/:courseId/exams', examRouter);
 
 route.route("/").get(advancedResults(Course,{path:'bootcamp',select:'name description'}), getAll);
 route.route("/:bootcampId").post(protect,authorize('admin','publisher'),clearCache('Course'),post);
