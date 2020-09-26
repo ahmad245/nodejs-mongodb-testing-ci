@@ -17,6 +17,7 @@ mongoose.Query.prototype.cache=function(option={}){
 }
 
 mongoose.Query.prototype.exec=async function(){
+   
     
   if(!this.useCache){
         return exec.apply(this,arguments);
@@ -28,9 +29,11 @@ mongoose.Query.prototype.exec=async function(){
   
   if(cache){  
     const doc=JSON.parse(cache);
-    return Array.isArray(doc)
-      ?doc.map(d=>new this.model(d))
-      :new this.model(doc);
+     return doc;
+
+    // return Array.isArray(doc)
+    //   ?doc.map(d=>new this.model(d))
+    //   :new this.model(doc);
   } 
   const result=await exec.apply(this,arguments);
     client.hset(this.hashKey,key,JSON.stringify(result))

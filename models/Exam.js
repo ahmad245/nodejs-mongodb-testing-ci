@@ -55,7 +55,16 @@ const examSchema = new mongoose.Schema({
   },
   
   
+},{
+  toJSON:{virtuals:true},
+  toObject:{virtuals:true}
 });
+examSchema.virtual('questions',{
+  ref: 'Question',
+  localField: '_id',
+  foreignField: 'exam',
+  justOne: false
+})
 
 const Exam = mongoose.model("Exam", examSchema);
 

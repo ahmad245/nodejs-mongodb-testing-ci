@@ -1,4 +1,6 @@
 const advancedResults = (model, populate) => async (req, res, next) => {
+  
+  
     let query;
     
     // Copy req.query
@@ -41,10 +43,18 @@ const advancedResults = (model, populate) => async (req, res, next) => {
     const endIndex = page * limit;
     const total = await model.countDocuments(JSON.parse(queryStr));
   
-    query = query.skip(startIndex).limit(limit).cache({key:model.modelName});
+    
+   
   
     if (populate) {
-      query = query.populate(populate);
+      console.log(populate);
+      
+      query = query.skip(startIndex).limit(limit).populate(populate)
+      //.cache({key:model.modelName});
+      
+    }else{
+      query = query.skip(startIndex).limit(limit)
+      //.cache({key:model.modelName});
     }
   
     // Executing query

@@ -12,7 +12,7 @@ const questionRouter=require('./question');
 const route = express.Router({mergeParams:true});
 route .use('/:examId/questions', questionRouter);
 
-route.route("/").get(advancedResults(Exam,{path:'course',select:'title description'}), getAll)
+route.route("/").get(advancedResults(Exam,{path:'course questions' ,select:'title description text options correctAnswer status score' }), getAll)
 .post(protect, authorize('publisher', 'admin'), post);
 
 

@@ -47,6 +47,11 @@ const couresSchema=new mongoose.Schema({
         required: true
       },
       students:[{type:mongoose.Schema.ObjectId, ref:'User',required:false}],
+      numberOfStudent:{
+        type:Number,
+        required:true,
+        default:0
+      }
 
 
 })
