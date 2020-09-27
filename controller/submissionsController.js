@@ -1,5 +1,8 @@
 const submissionRepository=require('../repositories/SubmissionRepository');
-const Exam=require('../models/exam/exam.model');
+const examRepository=require('../repositories/ExamRepository');
+
+
+
 module.exports.getAll = async (req, res, next) => {
   res.status(200).json(res.advancedResults);
 };
@@ -22,7 +25,8 @@ module.exports.post = async (req, res, next) => {
   req.body.student = req.user.id;
   console.log(req.params.examId);
   
-  const exam =await Exam.findById(req.params.examId);
+  const exam =await examRepository.findById(req.params.examId);
+  
   if (!exam) {
     return res
       .status(404)
@@ -33,7 +37,7 @@ module.exports.post = async (req, res, next) => {
 }
 
 module.exports.put = async (req, res, next) => {
-    let exam = await Exam.findById(req.params.id);
+    let exam = await examRepository.findById(req.params.id);
   
     if (!exam) {
       return res
@@ -54,7 +58,7 @@ module.exports.put = async (req, res, next) => {
         });
     }
   
-    exam = await Exam.findByIdAndUpdate(req.params.id, req.body, {
+    exam = await examRepository.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
     });
@@ -63,7 +67,7 @@ module.exports.put = async (req, res, next) => {
   };
   
   module.exports.remove = async (req, res, next) => {
-    const exam = await Exam.findById(req.params.id);
+    const exam = await examRepository.findById(req.params.id);
   
     if (!exam) {
       return res

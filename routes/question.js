@@ -2,7 +2,7 @@ const express=require('express');
 const {getAll,getById,post,put,remove}=require('./../controller/questionController');
 
 const advancedResults=require('./../middelware/advancedResults');
-const {Question}=require('../models/Question');
+const Question=require('../repositories/QuestionRepository').getModel();
 
 const {clearCache}=require('../middelware/clearCache');
 const {protect,authorize}=require('../middelware/auth');
@@ -10,7 +10,7 @@ const {protect,authorize}=require('../middelware/auth');
 const route = express.Router({mergeParams:true});
 
 
-route.route("/").get(advancedResults(Question), getAll)
+route.route("/").get(advancedResults(Question.model), getAll)
 .post(protect, authorize('publisher', 'admin'), post);
 
 

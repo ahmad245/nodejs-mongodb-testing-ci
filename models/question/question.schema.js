@@ -29,7 +29,7 @@ const questionSchema = new mongoose.Schema({
   }
 });
 
-const Question = mongoose.model("Question", questionSchema);
 
-module.exports.Question = Question;
-module.exports.questionSchema=questionSchema;
+
+
+module.exports=questionSchema;

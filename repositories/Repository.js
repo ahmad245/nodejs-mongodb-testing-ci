@@ -18,4 +18,7 @@ module.exports = class Repository {
       remove(id) {
         return this.dao.remove(id);
       }
+      getModel(){
+          return this.dao;
+      }
 }

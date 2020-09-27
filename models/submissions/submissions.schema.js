@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { questionSchema } = require("../Question");
+const questionSchema = require("../question/question.schema");
 
 const submissionsSchema = new mongoose.Schema({
   score: { type: Number },
