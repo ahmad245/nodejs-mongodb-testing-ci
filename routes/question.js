@@ -2,7 +2,7 @@ const express=require('express');
 const {getAll,getById,post,put,remove}=require('./../controller/questionController');
 
 const advancedResults=require('./../middelware/advancedResults');
-const Question=require('../models/Question');
+const {Question}=require('../models/Question');
 
 const {clearCache}=require('../middelware/clearCache');
 const {protect,authorize}=require('../middelware/auth');

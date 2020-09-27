@@ -7,6 +7,7 @@ const reviewRoute=require('./../routes/review');
 const uploadRoute=require('./../routes/upload');
 const examRoute=require('./../routes/exam');
 const questionRoute=require('./../routes/question');
+const submissionsRoute=require('./../routes/submissions');
 const error=require('../middelware/errorHandling');
 
 module.exports=(app)=>{
@@ -19,6 +20,7 @@ module.exports=(app)=>{
     app.use('/api/v1/upload', uploadRoute);
     app.use('/api/v1/exams', examRoute);
     app.use('/api/v1/questions', questionRoute);
+    app.use('/api/v1/submissions', submissionsRoute);
     
     app.use(error);
 }

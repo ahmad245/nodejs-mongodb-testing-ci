@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Bootcamp = require("./Bootcamp");
+const Bootcamp = require("../Bootcamp");
 const examSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -49,7 +49,7 @@ const examSchema = new mongoose.Schema({
     default: 1,
   },
   user: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
@@ -66,6 +66,6 @@ examSchema.virtual('questions',{
   justOne: false
 })
 
-const Exam = mongoose.model("Exam", examSchema);
+// const Exam = mongoose.model("Exam", examSchema);
 
-module.exports = Exam;
+module.exports = examSchema;

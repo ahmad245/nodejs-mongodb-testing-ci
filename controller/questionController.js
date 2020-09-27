@@ -1,5 +1,5 @@
-const Question = require("./../models/Question");
-const Exam = require("./../models/Exam");
+const {Question} = require("./../models/Question");
+const Exam = require("./../models/exam/exam.model");
 
 module.exports.getAll = async (req, res, next) => {
   res.status(200).json(res.advancedResults);

@@ -9,12 +9,13 @@ const questionSchema = new mongoose.Schema({
   },
 
   options: [{ type: String }],
-  correctAnswer: { type: Number, required: true },
+  correctAnswer: { type: String, required: true },
+  answer:{type:String,required:false},
   status: {
     type: Boolean,
     default: false,
   },
-  score: {
+  point: {
     type: Number,
     required: true,
   },
@@ -23,8 +24,12 @@ const questionSchema = new mongoose.Schema({
     ref: "Exam",
     required: true,
   },
+  type:{
+    type:String,enum:['TRUE_FALSE','MULTIPLE_CHOICE','ESSAY']
+  }
 });
 
 const Question = mongoose.model("Question", questionSchema);
 
-module.exports = Question;
+module.exports.Question = Question;
+module.exports.questionSchema=questionSchema;

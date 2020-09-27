@@ -8,8 +8,9 @@
         "status": false,
         "_id": "5f6b8b1f7320de33f31e0e3f",
         "text": "this is first question",
-        "correctAnswer": 1,
-        "score": 2,
+        "correctAnswer": "are you ok",
+        "point": 2,
+        "type":"MULTIPLE_CHOICE",
         "exam": "5f6b88d6c16dc033a85acd94",
         "__v": 0
     }

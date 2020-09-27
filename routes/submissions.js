@@ -1,5 +1,5 @@
 const express=require('express');
-const {getAll,getById,post,put,remove}=require('./../controller/examController');
+const {getAll,getById,post,put,remove}=require('./../controller/submissionsController');
 
 const advancedResults=require('./../middelware/advancedResults');
 const Exam=require('../models/exam/exam.model');
@@ -8,14 +8,11 @@ const {clearCache}=require('../middelware/clearCache');
 const {protect,authorize}=require('../middelware/auth');
 
 const questionRouter=require('./question');
-const submissionRouter=require('./submissions');
 
 const route = express.Router({mergeParams:true});
-route .use('/:examId/questions', questionRouter);
-route .use('/:examId/submissions', submissionRouter);
 
-route.route("/").get(advancedResults(Exam,{path:'course questions' ,select:'title description text options correctAnswer status score' }), getAll)
-.post(protect, authorize('publisher', 'admin'), post);
+route.route("/").get(advancedResults(Exam), getAll)
+.post(protect, authorize('publisher', 'admin','user'), post);
 
 
 route.route("/:id")
