@@ -9,7 +9,7 @@ const {
 } = require("./../controller/coursesController");
 
 const advancedResults=require('./../middelware/advancedResults');
-const Course=require('../models/Course');
+const Course=require('../repositories/CourseRepository').getModel();
 
 const {clearCache}=require('../middelware/clearCache');
 const {protect,authorize}=require('../middelware/auth');
@@ -20,7 +20,7 @@ const examRouter=require('./exam');
 const route = express.Router({mergeParams:true});
 route.use('/:courseId/exams', examRouter);
 
-route.route("/").get(advancedResults(Course,{path:'bootcamp user students' ,select:'name description email'}), getAll);
+route.route("/").get(advancedResults(Course.model,{path:'bootcamp user students' ,select:'name description email'}), getAll);
 route.route("/:bootcampId").post(protect,authorize('admin','publisher'),clearCache('Course'),post);
 
 route.route("/:id/apply")

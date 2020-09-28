@@ -1,12 +1,12 @@
-const Course = require("../models/Course");
-const Bootcamp = require("../models/Bootcamp");
+const courseRepository = require("../repositories/CourseRepository");
+const Bootcamp  = require("../repositories/BootcampRepository")
 const User = require("../models/User");
 const { startSession } = require("mongoose");
 module.exports.getAll = async (req, res, next) => {
   let query;
 
   if (req.params.bootcampId) {
-    const courses = await Course.find({ bootcamp: req.params.bootcampId });
+    const courses = await courseRepository.find({ bootcamp: req.params.bootcampId });
     res
       .status(200)
       .json({ success: true, count: courses.length, data: courses });
@@ -15,9 +15,11 @@ module.exports.getAll = async (req, res, next) => {
   }
 };
 module.exports.getById = async (req, res, next) => {
-  const course = await Course.findById(req.params.id).cache({
+  const course = await courseRepository.findById(req.params.id).cache({
     key: req.params.id,
   });
+  console.log(course);
+  
   if (!course) {
     return res
       .status(404)
@@ -44,12 +46,12 @@ module.exports.post = async (req, res, next) => {
       error: `User ${req.user.id} is not authorized to add a course to bootcamp ${bootcamp._id}`,
     });
   }
-  const course = await Course.create(req.body);
+  const course = await courseRepository.create(req.body);
   res.status(201).json({ success: true, data: course });
 };
 
 module.exports.put = async (req, res, next) => {
-  let course = await Course.findById(req.params.id);
+  let course = await courseRepository.findById(req.params.id);
 
   if (!course) {
     return res.status(404).json({
@@ -66,16 +68,13 @@ module.exports.put = async (req, res, next) => {
     });
   }
 
-  course = await Course.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  course = await courseRepository.update(req.params.id, req.body);
 
   res.status(200).json({ data: course, success: true });
 };
 
 module.exports.remove = async (req, res, next) => {
-  const course = await Course.findById(req.params.id);
+  const course = await courseRepository.findById(req.params.id);
 
   if (!course) {
     return res.status(404).json({
@@ -92,13 +91,13 @@ module.exports.remove = async (req, res, next) => {
     });
   }
 
-  await course.remove();
+  await courseRepository.remove(course._id);
 
   res.status(200).json({ data: course, success: true });
 };
 
 module.exports.apply = async (req, res, next) => {
-  let course = await Course.findById(req.params.id);
+  let course = await courseRepository.findById(req.params.id);
   let student = req.body.student;
 
   if (!course) {

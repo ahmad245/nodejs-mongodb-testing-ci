@@ -1,6 +1,6 @@
 jest.setTimeout(5000000);
 const mongoose=require('mongoose');
-const Bootcamp=require('../../../models/Bootcamp');
+const Bootcamp  = require("../../../repositories/BootcampRepository")
 const {validCollection,bootcamp}=require('./seed');
 const userModel=require('./../user/UserModel');
 const Repository=require('./../Repository');

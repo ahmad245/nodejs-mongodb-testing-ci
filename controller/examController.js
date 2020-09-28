@@ -1,5 +1,5 @@
 const examRepository = require("../repositories/ExamRepository");
-const Course = require("./../models/Course");
+const Course = require("../repositories/CourseRepository");
 
 module.exports.getAll = async (req, res, next) => {
   res.status(200).json(res.advancedResults);

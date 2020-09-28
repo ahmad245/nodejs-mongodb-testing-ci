@@ -14,7 +14,8 @@ const reviewRoute=require('./review');
 const {protect,authorize}=require('../middelware/auth');
 
 const advancedResults=require('./../middelware/advancedResults');
-const Bootcamp=require('../models/Bootcamp');
+
+const Bootcamp = require("../repositories/BootcampRepository").getModel();
 
 const {clearCache}=require('../middelware/clearCache');
 
@@ -26,7 +27,7 @@ route.use('/:bootcampId/reviews',reviewRoute);
 route.route("/radius/:zipcode/:distance").get(getByRadius);
 
 route.route("/")
-   .get(advancedResults(Bootcamp,'courses'),getAll)
+   .get(advancedResults(Bootcamp.model,'courses'),getAll)
    .post(protect,authorize('admin','publisher'),clearCache('Bootcamp') ,post);
 
 route.route("/:id")

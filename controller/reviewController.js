@@ -1,5 +1,5 @@
 const Review = require('../models/Review');
-const Bootcamp = require('../models/Bootcamp');
+const Bootcamp  = require("../repositories/BootcampRepository")
 
 // @desc      Get reviews
 // @route     GET /api/v1/reviews
