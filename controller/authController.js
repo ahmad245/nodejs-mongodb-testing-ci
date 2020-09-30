@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const ErrorResponse = require('../utils/errorResponse');
 const sendEmail = require('../utils/sendEmail');
-const User = require('../models/User');
+const userRepository = require('../repositories/UserRepository');
 
 
 // @desc      Register user
@@ -11,7 +11,7 @@ exports.register = async (req, res, next) => {
   const { name, email, password, role } = req.body;
 
   // Create user
-  const user = await User.create({
+  const user = await userRepository.create({
     name,
     email,
     password,
@@ -33,7 +33,7 @@ exports.login = async (req, res, next) => {
   }
 
   // Check for user
-  const user = await User.findOne({ email }).select('+password');
+  const user = await userRepository.findOne({ email }).select('+password');
 
   if (!user) {
     return  res.status(401).json({ success: false ,error: "Invalid credentials"});
@@ -41,7 +41,7 @@ exports.login = async (req, res, next) => {
   }
 
   // Check if password matches
-  const isMatch = await user.matchPassword(password);
+  const isMatch = await userRepository.matchPassword(password,user);
 
   if (!isMatch) {
     return  res.status(401).json({ success: false ,error: "Invalid credentials"});
@@ -87,10 +87,7 @@ exports.updateDetails = async (req, res, next) => {
     email: req.body.email
   };
 
-  const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
-    new: true,
-    runValidators: true
-  });
+  const user = await userRepository.update(req.user.id, fieldsToUpdate);
 
   res.status(200).json({
     success: true,
@@ -102,10 +99,10 @@ exports.updateDetails = async (req, res, next) => {
 // @route     PUT /api/v1/auth/updatepassword
 // @access    Private
 exports.updatePassword = async (req, res, next) => {
-  const user = await User.findById(req.user.id).select('+password');
+  const user = await userRepository.findById(req.user.id).select('+password');
 
   // Check current password
-  if (!(await user.matchPassword(req.body.currentPassword))) {
+  if (!(await userRepository.matchPassword(req.body.currentPassword,user))) {
     return  res.status(401).json({ success: false ,error: "Password is incorrect"});
    
   }
@@ -120,14 +117,14 @@ exports.updatePassword = async (req, res, next) => {
 // @route     POST /api/v1/auth/forgotpassword
 // @access    Public
 exports.forgotPassword = async (req, res, next) => {
-  const user = await User.findOne({ email: req.body.email });
+  const user = await userRepository.findOne({ email: req.body.email });
 
   if (!user) {
     return  res.status(404).json({ success: false ,error: "There is no user with that email"});
   }
 
   // Get reset token
-  const resetToken = user.getResetPasswordToken();
+  const resetToken = userRepository.getResetPasswordToken(user);
 
   await user.save({ validateBeforeSave: false });
 
@@ -166,7 +163,7 @@ exports.resetPassword = async (req, res, next) => {
     .update(req.params.resettoken)
     .digest('hex');
 
-  const user = await User.findOne({
+  const user = await userRepository.findOne({
     resetPasswordToken,
     resetPasswordExpire: { $gt: Date.now() }
   });
@@ -191,7 +188,7 @@ exports.resetPassword = async (req, res, next) => {
 // Get token from model, create cookie and send response
 const sendTokenResponse = (user, statusCode, res) => {
   // Create token
-  const token = user.getSignedJwtToken();
+  const token = userRepository.getSignedJwtToken(user);
 
   const options = {
     expires: new Date(

@@ -7,7 +7,7 @@ const {
   remove
 } = require('../controller/reviewController');
 
-const Review = require('../models/Review');
+const Review = require('../repositories/ReviewRepository').getModel();
 
 const router = express.Router({ mergeParams: true });
 
@@ -19,7 +19,7 @@ const { protect, authorize } = require('../middelware/auth');
 router
   .route('/')
   .get(
-    advancedResults(Review, {
+    advancedResults(Review.model, {
       path: 'bootcamp',
       select: 'name description'
     }),

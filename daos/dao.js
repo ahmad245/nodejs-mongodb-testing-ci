@@ -41,4 +41,5 @@ module.exports = class Dao {
     await model.remove();
     return model;
   }
+ 
 };

@@ -1,4 +1,4 @@
-const Review = require('../models/Review');
+const reviewRepository = require('../repositories/ReviewRepository');
 const Bootcamp  = require("../repositories/BootcampRepository")
 
 // @desc      Get reviews
@@ -7,7 +7,7 @@ const Bootcamp  = require("../repositories/BootcampRepository")
 // @access    Public
 exports.getAll = async (req, res, next) => {
   if (req.params.bootcampId) {
-    const reviews = await Review.find({ bootcamp: req.params.bootcampId }).cache({key:req.params.bootcampId});
+    const reviews = await reviewRepository.find({ bootcamp: req.params.bootcampId }).cache({key:req.params.bootcampId});
 
     return res.status(200).json({
       success: true,
@@ -23,7 +23,7 @@ exports.getAll = async (req, res, next) => {
 // @route     GET /api/v1/reviews/:id
 // @access    Public
 exports.getById = async (req, res, next) => {
-  const review = await Review.findById(req.params.id).populate({
+  const review = await reviewRepository.findById(req.params.id).populate({
     path: 'bootcamp',
     select: 'name description'
   }).cache({key:req.params.id});
@@ -55,7 +55,7 @@ exports.post = async (req, res, next) => {
     
   }
 
-  const review = await Review.create(req.body);
+  const review = await reviewRepository.create(req.body);
 
   res.status(201).json({
     success: true,
@@ -67,7 +67,7 @@ exports.post = async (req, res, next) => {
 // @route     PUT /api/v1/reviews/:id
 // @access    Private
 exports.put = async (req, res, next) => {
-  let review = await Review.findById(req.params.id);
+  let review = await reviewRepository.findById(req.params.id);
 
   if (!review) {
     return  res.status(404).json({ success: false ,error: `No review with the id of ${req.params.id}`});
@@ -80,10 +80,7 @@ exports.put = async (req, res, next) => {
     
   }
 
-  review = await Review.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
-  });
+  review = await reviewRepository.update(req.params.id, req.body);
 
 // await review.save();
 
@@ -97,7 +94,7 @@ exports.put = async (req, res, next) => {
 // @route     DELETE /api/v1/reviews/:id
 // @access    Private
 exports.remove = async (req, res, next) => {
-  const review = await Review.findById(req.params.id);
+  const review = await reviewRepository.findById(req.params.id);
 
   if (!review) {
     return  res.status(404).json({ success: false ,error: `No review with the id of ${req.params.id}`});
@@ -110,7 +107,7 @@ exports.remove = async (req, res, next) => {
     
   }
 
-  await review.remove();
+  await reviewRepository.remove(review._id);
 
   res.status(200).json({
     success: true,
