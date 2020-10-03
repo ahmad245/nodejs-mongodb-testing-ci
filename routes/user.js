@@ -8,7 +8,7 @@ const {
   remove
 } = require('../controller/userController');
 
-const User=require('../models/User');
+const User=require('../repositories/UserRepository').getModel();
 
 const router = express.Router();
 
@@ -23,7 +23,7 @@ router.use(authorize('admin'));
 
 router
   .route('/')
-  .get(advancedResults(User), getAll)
+  .get(advancedResults(User.model), getAll)
   .post(post);
 
 router

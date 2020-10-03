@@ -1,6 +1,6 @@
 const courseRepository = require("../repositories/CourseRepository");
 const Bootcamp  = require("../repositories/BootcampRepository")
-const User = require("../models/User");
+const User = require("../repositories/UserRepository");
 const { startSession } = require("mongoose");
 module.exports.getAll = async (req, res, next) => {
   let query;
@@ -18,7 +18,7 @@ module.exports.getById = async (req, res, next) => {
   const course = await courseRepository.findById(req.params.id).cache({
     key: req.params.id,
   });
-  console.log(course);
+
   
   if (!course) {
     return res

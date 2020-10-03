@@ -7,7 +7,7 @@ const bootcamp=require('./../bootcamp/bootcamp');
 
 const {userNotlogin,noObject,noPermission,invalidId}=require('./../CommonFailTest');
 
-const Review = require("../../../models/Review");
+const Review = require("../../../repositories/ReviewRepository");
 
 const Service=require('./../service');
 

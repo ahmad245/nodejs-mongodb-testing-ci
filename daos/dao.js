@@ -13,7 +13,7 @@ module.exports = class Dao {
     return this.model.find(obj);
   }
   findOne(obj) {
-    console.log(this.dao);
+  
     return this.model.findOne(obj);
   }
 
@@ -41,5 +41,20 @@ module.exports = class Dao {
     await model.remove();
     return model;
   }
- 
+ async drobIndexes(obj) {
+   
+    this.model.collection.dropIndex(obj);
+  }
+ async dropAllIndexes(obj) {
+    this.model.collection.dropIndexes(obj);
+  }
+  removeAll() {
+    this.model.collection.remove({});
+  }
+  insertMany(arr) {
+    return this.model.collection.insertMany(arr);
+  }
+  insertOne(obj) {
+    return this.model.collection.insertOne(obj);
+  }
 };

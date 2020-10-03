@@ -6,8 +6,8 @@ const bootcamp = require("./bootcamp");
 const {noPermission,noObject,userNotlogin,invalidId}=require('./../CommonFailTest');
 
 
-const Bootcamp = require("../../../models/Bootcamp");
-const User = require("../../../models/User");
+const Bootcamp = require("../../../repositories/BootcampRepository");
+
 
 const Service=require('./../service');
 

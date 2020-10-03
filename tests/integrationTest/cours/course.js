@@ -1,6 +1,6 @@
 
 
-const Course = require("../../../models/Course");
+const Course = require("../../../repositories/CourseRepository");
 const { validCollection, course } = require("./seed");
 const Repository = require("../Repository");
 class CourseModel extends Repository {

@@ -9,4 +9,4 @@ describe('/api/bootcamp',bootcampTest);
 describe('/api/course',courseTest);
 describe('/api/review',reviewTest);
 
-describe.only('middleware',middleware);
+describe('middleware',middleware);

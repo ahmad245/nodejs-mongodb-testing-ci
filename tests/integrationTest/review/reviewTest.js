@@ -1,7 +1,7 @@
-const Bootcamp = require("../../../models/Bootcamp");
-const User=require("../../../models/User");
-const Course=require("../../../models/Course");
-const Review=require("../../../models/Review");
+const Bootcamp = require("../../../repositories/BootcampRepository");
+const User=require("../../../repositories/UserRepository");
+const Course=require("../../../repositories/CourseRepository");
+const Review=require("../../../repositories/ReviewRepository");
 
 const review = require("./review");
 
@@ -15,19 +15,21 @@ module.exports.reviewTest = () => {
   let server = require("../../../index");
   beforeEach(async () => {
     //  require("../../../index");
-    
+   
   });
   afterEach(async () => {
    // await bootcamp.remove()
-     await Bootcamp.collection.dropIndexes();
-     await Bootcamp.remove({});
-     await Review.collection.dropIndexes( {  bootcamp: 1, user: 1 } )
-     await Review.collection.dropIndexes();
-     await Review.remove({});
+     await Bootcamp.drobIndexes({name:1});
+     await Bootcamp.removeAll();
+     await Review.drobIndexes( 
+      "bootcamp_1_user_1" 
+     )
+    
+     await Review.removeAll();
 
   
-    await  User.collection.dropIndexes();
-    await User.remove({});
+    await  User.drobIndexes({email:1});
+    await User.removeAll({});
 
     await server.close();
   });

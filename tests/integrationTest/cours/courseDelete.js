@@ -5,7 +5,7 @@ const course = require("./course");
 
 const {userNotlogin,noObject,noPermission,invalidId}=require('./../CommonFailTest');
 
-const Course = require("../../../models/Course");
+const Course = require("../../../repositories/CourseRepository");
 
 const Service=require('./../service');
 

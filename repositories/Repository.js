@@ -27,4 +27,19 @@ module.exports = class Repository {
   getModel() {
     return this.dao;
   }
+  drobIndexes(obj){
+    this.dao.drobIndexes()
+  }
+  dropAllIndexes(obj) {
+    this.dao.dropAllIndexes(obj);
+  }
+  removeAll(){
+    this.dao.removeAll();
+  }
+  insertMany(arr){
+   return this.dao.insertMany(arr)
+  } 
+  insertOne(obj) {
+   return this.dao.insertOne(obj);
+  }
 };

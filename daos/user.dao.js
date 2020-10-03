@@ -32,5 +32,8 @@ class UserDao extends Dao {
 
     return resetToken;
   }
+  drobIndexes(){
+    User.collection.dropIndexes();
+  }
 }
 module.exports = new UserDao(User);

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const UserModel = require("../user/UserModel");
-const User = require("../../../models/User");
+const User = require("../../../repositories/UserRepository");
 const { protect } = require("../../../middelware/auth");
 module.exports.auth = (server) => {
   return () => {

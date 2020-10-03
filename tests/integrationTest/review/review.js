@@ -1,6 +1,6 @@
 
 
-const Review = require("../../../models/Review");
+const Review = require("../../../repositories/ReviewRepository");
 const { validCollection, review } = require("./seed");
 const Repository = require("../Repository");
 class ReviewModel extends Repository {

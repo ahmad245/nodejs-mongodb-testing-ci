@@ -1,6 +1,6 @@
 jest.setTimeout(5000000);
 const mongoose=require('mongoose');
-const User=require('../../../models/User');
+const User=require('../../../repositories/UserRepository');
 
 const {user}=require('./seed');
 
@@ -9,7 +9,7 @@ class UserModel{
 
   async  getUser(email=null){
        const user =await User.create(this.getValidUser(email));
-      const  token = user.getSignedJwtToken();
+      const  token = User.getSignedJwtToken(user);
       return {token,user};
     }
 

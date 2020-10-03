@@ -6,7 +6,7 @@ const bootcamp = require("./bootcamp");
 const {userNotlogin}=require('./../CommonFailTest');
 
 const Bootcamp  = require("../../../repositories/BootcampRepository")
-const User = require("../../../models/User");
+const User = require("../../../repositories/UserRepository");
 
 const Service=require('./../service');
 
@@ -43,9 +43,6 @@ module.exports.post = (server) => {
       service.setToken(token);
     });
     afterEach(async () => {
-        // await  User.collection.dropIndexes();
-        // await User.remove({});
-       
     });
     it(message({ name: "bootcamp" }).userNotlogin, userNotlogin(bootcamp,service,exec));
 
@@ -55,7 +52,8 @@ module.exports.post = (server) => {
       const res = await exec();
 
       const result = await Bootcamp.find({ name: "bootcamp" });
-
+          console.log(result);
+          
       expect(result).not.toBeNull();
       expect(res.body.success).toBeTruthy();
       expect(result.some((b) => b.name == obj.name)).toBeTruthy();
